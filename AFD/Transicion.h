@@ -4,7 +4,8 @@
 #include "Estado.h"
 
 template <typename Simbolo>
-class Transicion {
+class Transicion 
+{
 private:
     Estado origen;
     Simbolo simbolo;

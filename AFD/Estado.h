@@ -3,7 +3,8 @@
 
 #include <string>
 
-class Estado {
+class Estado 
+{
 private:
     std::string id;
 
@@ -11,19 +12,19 @@ public:
     Estado() = default;
     explicit Estado(const std::string& id) : id(id) {}
 
-    const std::string& getId() const {
+    const std::string& getId() const{
         return id;
     }
 
-    bool operator==(const Estado& other) const {
+    bool operator==(const Estado& other) const{
         return id == other.id;
     }
 };
 
-namespace std {
+namespace std{
     template<>
     struct hash<Estado> {
-        size_t operator()(const Estado& e) const noexcept {
+        size_t operator()(const Estado& e) const noexcept{
             return hash<std::string>()(e.getId());
         }
     };

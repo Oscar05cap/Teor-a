@@ -3,27 +3,32 @@
 
 #include <stdexcept>
 
-class InvalidStateException : public std::runtime_error {
+class InvalidStateException : public std::runtime_error
+{
 public:
     using std::runtime_error::runtime_error;
 };
 
-class InvalidSymbolException : public std::runtime_error {
+class InvalidSymbolException : public std::runtime_error
+{
 public:
     using std::runtime_error::runtime_error;
 };
 
-class NonDeterministicException : public std::runtime_error {
+class NonDeterministicException : public std::runtime_error
+{
 public:
     using std::runtime_error::runtime_error;
 };
 
-class IncompleteAutomatonException : public std::runtime_error {
+class IncompleteAutomatonException : public std::runtime_error 
+{
 public:
     using std::runtime_error::runtime_error;
 };
 
-class InvalidFormatException : public std::runtime_error {
+class InvalidFormatException : public std::runtime_error 
+{
 public:
     using std::runtime_error::runtime_error;
 };

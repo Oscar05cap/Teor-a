@@ -10,10 +10,11 @@
 #include "Exceptions.h"
 
 template <typename Simbolo>
-class AFDParser {
+class AFDParser 
+{
 private:
 
-    static std::string trim(const std::string& s) {
+    static std::string trim(const std::string& s){
         size_t start = 0;
         while (start < s.size() && std::isspace(s[start])) start++;
 
@@ -28,7 +29,7 @@ private:
     }
 public:
 
-    AFD<Simbolo> parseFromFile(const std::string& filename) {
+    AFD<Simbolo> parseFromFile(const std::string& filename){
 
         std::ifstream file(filename);
         if (!file)
@@ -36,7 +37,7 @@ public:
 
         AFDBuilder<Simbolo> builder;
 
-        enum class Section {
+        enum class Section{
             NONE,
             ESTADOS,
             INICIAL,
@@ -49,51 +50,52 @@ public:
 
         std::string line;
 
-        while (std::getline(file, line)) {
+        while (std::getline(file, line)){
 
             line = trim(line);
 
             if (line.empty()) continue;
             if (leeP(line, "#")) continue;
-            if (line == "[ESTADOS]") {
+            if (line == "[ESTADOS]"){
                 current = Section::ESTADOS;
                 continue;
             }
-            if (line == "[INICIAL]") {
+            if (line == "[INICIAL]"){
                 current = Section::INICIAL;
                 continue;
             }
-            if (line == "[FINAL]") {
+            if (line == "[FINAL]"){
                 current = Section::FINAL;
                 continue;
             }
-            if (line == "[ALFABETO]") {
+            if (line == "[ALFABETO]"){
                 current = Section::ALFABETO;
                 continue;
             }
-            if (line == "[TRANSICIONES]") {
+            if (line == "[TRANSICIONES]"){
                 current = Section::TRANSICIONES;
                 continue;
             }
 
-            switch (current) {
+            switch (current) 
+            {
 
-                case Section::ESTADOS: {
+                case Section::ESTADOS:{
                     builder.agregarEstado(Estado(line));
                     break;
                 }
 
-                case Section::INICIAL: {
+                case Section::INICIAL:{
                     builder.establecerInicial(Estado(line));
                     break;
                 }
 
-                case Section::FINAL: {
+                case Section::FINAL:{
                     builder.agregarFinal(Estado(line));
                     break;
                 }
 
-                case Section::ALFABETO: {
+                case Section::ALFABETO:{
                     if (line.size() != 1)
                         throw InvalidFormatException("Símbolo inválido en ALFABETO");
 
@@ -101,7 +103,7 @@ public:
                     break;
                 }
 
-                case Section::TRANSICIONES: {
+                case Section::TRANSICIONES:{
 
                     std::istringstream iss(line);
                     std::string origen, simboloStr, destino;

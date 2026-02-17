@@ -8,7 +8,8 @@
 #include "AFD_M.h"
 
 template <typename Simbolo>
-class AFDBuilder {
+class AFDBuilder 
+{
 private:
     std::unordered_set<Estado> estados;
     std::unordered_set<Simbolo> alfabeto;
@@ -18,31 +19,31 @@ private:
     std::unordered_set<Estado> estadosFinales;
 
 public:
-    void agregarEstado(const Estado& e) {
+    void agregarEstado(const Estado& e){
         estados.insert(e);
     }
 
-    void agregarSimbolo(const Simbolo& s) {
+    void agregarSimbolo(const Simbolo& s){
         alfabeto.insert(s);
     }
 
-    void establecerInicial(const Estado& e) {
+    void establecerInicial(const Estado& e){
         if (!estados.count(e))
             throw InvalidStateException("No hay estados iniciales");
         estadoInicial = e;
     }
 
-    void agregarFinal(const Estado& e) {
+    void agregarFinal(const Estado& e){
         if (!estados.count(e))
             throw InvalidStateException("No hay estados finales");
         estadosFinales.insert(e);
     }
 
-    void agregarTransicion(const Transicion<Simbolo>& t) {
+    void agregarTransicion(const Transicion<Simbolo>& t){
         listaTransiciones.push_back(t);
     }
 
-    AFD<Simbolo> build() {
+    AFD<Simbolo> build(){
 
         if (!estadoInicial.has_value())
             throw InvalidStateException("No hay estados iniciales");
@@ -53,7 +54,7 @@ public:
         > transiciones;
 
         //Construcción y validación del AFD
-        for (const auto& t : listaTransiciones) {
+        for (const auto& t : listaTransiciones){
 
             if (!estados.count(t.getOrigen()) ||
                 !estados.count(t.getDestino()))

@@ -3,9 +3,9 @@
 #include <vector>
 #include "AFDParser.h"
 
-int main() {
+int main(){
 
-    try {
+    try{
         AFDParser<char> parser;
 
         //Se carga al automata desde el archivo
@@ -16,7 +16,7 @@ int main() {
 
         std::string input;
 
-        while (true) {
+        while (true){
 
             std::cout << "> ";
             std::cin >> input;
@@ -34,7 +34,7 @@ int main() {
                 std::cout << "Cadena RECHAZADA\n";
         }
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception& e){
         std::cerr << "Error: " << e.what() << std::endl;
     }
 

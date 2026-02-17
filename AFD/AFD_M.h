@@ -10,7 +10,8 @@
 #include "Exceptions.h"
 
 template <typename Simbolo>
-class AFD {
+class AFD 
+{
 private:
     std::unordered_set<Estado> estados;
     std::unordered_set<Simbolo> alfabeto;
@@ -41,7 +42,7 @@ public:
           estadosFinales(estadosFinales)
     {}
 
-    bool acepta(const std::vector<Simbolo>& cadena) const {
+    bool acepta(const std::vector<Simbolo>& cadena) const{
         Estado actual = estadoInicial;
 
         for (const auto& simbolo : cadena) {
