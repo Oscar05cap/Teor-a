@@ -1,4 +1,4 @@
-#ifndef AFD_VISUALISER_H
+#ifndef AFD_VISUALIZER_H
 #define AFD_VISUALISER_H
 
 #include <iomanip>
@@ -18,11 +18,11 @@ class AFD_Visualizer{
     AFD_Visualizer(const AFD<Simbolo>& automata) : afd(automata) {}
 
     void imprimirEnConsola() const{
-        const auto& estados = afd.getEstados();
-        const auto& alfabeto = afd.getAlfabeto();
-        const auto& transiciones = afd.getTransiciones();
-        const auto& estadoInicial = afd.getEstadoInicial();
-        const auto& estadoAceptacion = afd.getEstadoAceptacion();
+        const auto& estados = afd.agregarEstado();
+        const auto& alfabeto = afd.agregarSimbolo();
+        const auto& transiciones = afd.agregarTransicion();
+        const auto& estadoInicial = afd.establecerInicial();
+        const auto& estadoAceptacion = afd.agregarFinal();
 
         std::cout << std::setw(10) << "Estado";
         for(const auto& simbolo : alfabeto){
@@ -35,24 +35,24 @@ class AFD_Visualizer{
         for(const auto& estado : estados){
             std::string etiqueta = estado;
 
-            if(estado == INICIAL)
-                etiqueta = '->' + etiqueta;
+            if(estado == estadoInicial)
+                etiqueta = "->" + etiqueta;
             
-            if(estado == FINAL)
-                etiqueta = '*' + etiqueta;
+            if(estado == estadoAceptacion)
+                etiqueta = "*" + etiqueta;
 
             std::cout << std::setw(10) << etiqueta;
 
             for(const auto& simbolo: alfabeto){
                 if(transiciones.at(estado).count(simbolo))
-                    std::cout << std::setw(10) << transiciones.at(estado).at(simbolo)
+                    std::cout << std::setw(10) << transiciones.at(estado).at(simbolo);
                 else
                     std::cout << std::setw(10) << "-";
             }
 
             std::cout << "\n";
         }
-            std::cout << "\n"
+            std::cout << "\n";
     }
 
     void imprimirDot(){
@@ -60,4 +60,4 @@ class AFD_Visualizer{
     }
 };
 
-#endif AFD_VISUALISER_H
+#endif 
